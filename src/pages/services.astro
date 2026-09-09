@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const services = await getCollection('services');
+---
+
+<Layout title="Our Services">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-blue-700 mb-6">سرویس‌های ما</h1>
+    <ul class="grid gap-4">
+      {services.map((service) => (
+        <li class="p-4 border rounded-lg shadow-sm">
+          <h2 class="text-xl font-semibold text-gray-800">{service.data.title}</h2>
+          <!-- فراخوانی صحیح دیسکریپشن که از CMS ادیت می‌کنید -->
+          <p class="text-gray-600 mt-2 whitespace-pre-line">{service.data.description}</p>
+          {service.data.icon && <span class="text-xs text-blue-500 mt-2 block">آیکون: {service.data.icon}</span>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>

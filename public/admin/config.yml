@@ -1,0 +1,18 @@
+local_backend: true
+
+backend:
+  name: git-gateway
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon", name: "icon", widget: "string" }
