@@ -1,7 +1,6 @@
-local_backend: true
-
 backend:
   name: git-gateway
+  branch: main # یا master
 
 media_folder: public/uploads
 public_folder: /uploads
