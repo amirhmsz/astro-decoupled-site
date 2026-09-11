@@ -1,6 +1,8 @@
+local_backend: true
+
 backend:
   name: git-gateway
-  branch: main # یا master
+  branch: main
 
 media_folder: public/uploads
 public_folder: /uploads
@@ -15,3 +17,26 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Icon", name: "icon", widget: "string" }
+
+  - name: "terminals"
+    label: "Terminals"
+    folder: "src/content/terminals"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Name (English)", name: "nameEn", widget: "string" }
+      - { label: "Status", name: "status", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Hours", name: "hours", widget: "string" }
+
+  - name: "posts"
+    label: "Posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Video URL (Aparat)", name: "videoUrl", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

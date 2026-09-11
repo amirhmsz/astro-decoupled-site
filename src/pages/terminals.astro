@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import TerminalCard from '../components/TerminalCard.astro';
+
+const terminals = await getCollection('terminals');
+---
+<Layout title="Terminals">
+  <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+    {terminals.map((terminal) => (
+      <TerminalCard
+        name={terminal.data.name}
+        nameEn={terminal.data.nameEn}
+        status={terminal.data.status}
+        location={terminal.data.location}
+        tags={terminal.data.tags}
+        hours={terminal.data.hours}
+      />
+    ))}
+  </div>
+</Layout>

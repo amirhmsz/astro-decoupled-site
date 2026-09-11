@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function getAparatEmbedUrl(url?: string) {
+  if (!url) return null;
+  const match = url.match(/(?:v\/|video\/video\/embed\/videohash\/)([a-zA-Z0-9]+)/);
+  return match && match[1] ? `https://www.aparat.com/video/video/embed/videohash/${match[1]}/vt/frame` : null;
+}
+const aparatEmbedUrl = getAparatEmbedUrl(post.data.videoUrl);
+---
+
+<Layout title={post.data.title}>
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-blue-700 mb-6">{post.data.title}</h1>
+    
+    {aparatEmbedUrl && (
+      <div class="w-full aspect-video rounded-lg overflow-hidden mb-6 bg-black">
+        <iframe src={aparatEmbedUrl} allowfullscreen class="w-full h-full border-0"></iframe>
+      </div>
+    )}
+    
+    <div class="prose max-w-none text-gray-600 mt-6 whitespace-pre-line">
+      <Content />
+    </div>
+  </div>
+</Layout>

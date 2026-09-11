@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection('posts');
+---
+
+<Layout title="اخبار و مقالات">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-blue-700 mb-6">اخبار و پست‌ها</h1>
+    <ul class="grid gap-4">
+      {posts.map((post) => (
+        <li class="p-4 border rounded-lg shadow-sm">
+          <h2 class="text-xl font-semibold text-gray-800">{post.data.title}</h2>
+          {post.data.videoUrl && <span class="text-xs text-red-500 mt-2 block">دارای ویدیو آپارات</span>}
+          {/* Ensure post.id is trimmed and correctly formatted */}
+          <a href={`/posts/${encodeURIComponent(post.id)}`} class="text-blue-500 text-sm mt-2 inline-block font-semibold">
+            مشاهده پست
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
