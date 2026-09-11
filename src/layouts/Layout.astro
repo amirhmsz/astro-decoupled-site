@@ -33,7 +33,6 @@ const schemaData = {
 ---
 
 <html lang="fa" dir="rtl">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,6 +58,9 @@ const schemaData = {
 
     <!-- داده‌های ساختاریافته (JSON-LD) برای درک بهتر گوگل -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Netlify Identity widget: is:inline stops Astro from converting this to an ES module, which would trigger a CORS block -->
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <slot />
